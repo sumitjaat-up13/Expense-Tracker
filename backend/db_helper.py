@@ -11,7 +11,7 @@ logger= setup_logger('db_helper')
 
 @contextmanager
 def get_db_cursor(commit=False):
-   connection = mysql.connector.connect(
+    connection = mysql.connector.connect(
         host=os.getenv("MYSQL_HOST"),
         user=os.getenv("MYSQL_USER"),
         password=os.getenv("MYSQL_PASSWORD"),
@@ -77,3 +77,4 @@ if __name__ == '__main__':
     for record in summary:
 
         print(record)
+
