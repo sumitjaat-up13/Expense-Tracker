@@ -3,7 +3,7 @@ from datetime import datetime
 import requests
 
 
-API_URL = "http://localhost:8000"
+API_URL = "https://web-production-523d5.up.railway.app"
 
 def add_update_tab():
     selected_date = st.date_input("Enter Date", datetime(2024, 8, 1), label_visibility="collapsed")
@@ -59,4 +59,5 @@ def add_update_tab():
             if req.status_code == 200:
                 st.success("Successfully updated expenses")
             else:
+
                 st.error("Failed to update expenses")
