@@ -3,7 +3,7 @@ from datetime import datetime
 import requests
 import pandas as pd
 
-API_URL = "http://localhost:8000"
+API_URL = "https://web-production-523d5.up.railway.app"
 
 def analytics_tab():
     col1, col2 = st.columns(2)
@@ -38,3 +38,4 @@ def analytics_tab():
         df_sorted["Total"] = df_sorted["Total"].map("{:,.2f}".format)
         df_sorted["Percentage"] = df_sorted["Percentage"].map("{:,.2f}".format)
         st.table(df_sorted)
+
