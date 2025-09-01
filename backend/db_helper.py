@@ -9,15 +9,11 @@ load_dotenv()
 
 logger= setup_logger('db_helper')
 
+
 @contextmanager
 def get_db_cursor(commit=False):
-    connection = mysql.connector.connect(
-        host=os.getenv("MYSQL_HOST"),
-        user=os.getenv("MYSQL_USER"),
-        password=os.getenv("MYSQL_PASSWORD"),
-        database=os.getenv("MYSQL_DATABASE"),
-        port=int(os.getenv("MYSQL_PORT", 3306))
-    )
+    # Ab sirf ek hi DATABASE_URL variable se connect karein
+    connection = mysql.connector.connect(url=os.getenv("MYSQL_PUBLIC_URL"))
     cursor = connection.cursor(dictionary=True)
     try:
         yield cursor
@@ -77,4 +73,5 @@ if __name__ == '__main__':
     for record in summary:
 
         print(record)
+
 
