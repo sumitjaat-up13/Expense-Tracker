@@ -1,19 +1,23 @@
-import mysql.connector
-from contextlib import contextmanager
-from backend.logging_setup import setup_logger
 import os
-from dotenv import load_dotenv
+import mysql.connector
+import logging
+from contextlib import contextmanager
 
-load_dotenv()
-
-
-logger= setup_logger('db_helper')
+# Logger setup
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
 
 @contextmanager
 def get_db_cursor(commit=False):
     # Ab sirf ek hi DATABASE_URL variable se connect karein
-    connection = mysql.connector.connect(url=os.getenv("MYSQL_PUBLIC_URL"))
+    connection = mysql.connector.connect(
+        host=os.getenv("MYSQL_HOST"),
+        user=os.getenv("MYSQL_USER"),
+        password=os.getenv("MYSQL_PASSWORD"),
+        database=os.getenv("MYSQL_DATABASE"),
+        port=int(os.getenv("MYSQL_PORT"))
+    )
     cursor = connection.cursor(dictionary=True)
     try:
         yield cursor
@@ -23,12 +27,14 @@ def get_db_cursor(commit=False):
         cursor.close()
         connection.close()
 
+
 def fetch_expenses_for_date(expense_date):
     logger.info(f"Fetching expenses for date called with: {expense_date}")
     with get_db_cursor() as cursor:
         cursor.execute("SELECT * FROM expenses WHERE expense_date = %s", (expense_date,))
         expenses = cursor.fetchall()
         return expenses
+
 
 def delete_expenses_for_date(expense_date):
     logger.info(f"Delete expenses for date called with: {expense_date}")
@@ -39,39 +45,43 @@ def delete_expenses_for_date(expense_date):
 def insert_expense(expense_date, amount, category, notes):
     if amount == 0 or not str(notes).strip() or not str(category).strip():
         logger.info(
-            f"Skipping empty/invalid expense row for date: {expense_date}, amount: {amount}, category: {category}, notes: {notes}")
+            f"Skipping empty/invalid expense row for date: {expense_date}, "
+            f"amount: {amount}, category: {category}, notes: {notes}"
+        )
         return
 
-    logger.info(f"Inserting expense for date called with: {expense_date},amount: {amount},category: {category},notes: {notes}")
+    logger.info(
+        f"Inserting expense for date called with: {expense_date}, "
+        f"amount: {amount}, category: {category}, notes: {notes}"
+    )
     with get_db_cursor(commit=True) as cursor:
         cursor.execute(
             "INSERT INTO expenses (expense_date, amount, category, notes) VALUES (%s, %s, %s, %s)",
             (expense_date, amount, category, notes)
         )
 
-def fetch_expense_summary(start_date,end_date):
+
+def fetch_expense_summary(start_date, end_date):
     logger.info(f"Fetching expense summary for date called with: {start_date} end: {end_date}")
     with get_db_cursor(commit=True) as cursor:
         cursor.execute(
-            '''SELECT category ,SUM(amount) as total 
-            FROM expenses WHERE expense_date 
-            BETWEEN %s and %s
-            GROUP BY category;''',
-            (start_date,end_date)
+            '''SELECT category, SUM(amount) as total 
+               FROM expenses 
+               WHERE expense_date BETWEEN %s AND %s
+               GROUP BY category;''',
+            (start_date, end_date)
         )
         data = cursor.fetchall()
         return data
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     expenses = fetch_expenses_for_date("2024-09-30")
     print(expenses)
 
-    # insert_expense("2024-08-25" ,40, "Food", "Eat tasty samosa chat")
+    # insert_expense("2024-08-25", 40, "Food", "Eat tasty samosa chat")
     # delete_expenses_for_date("2024-08-25")
-    summary = fetch_expense_summary("2024-08-01","2024-08-05")
+
+    summary = fetch_expense_summary("2024-08-01", "2024-08-05")
     for record in summary:
-
         print(record)
-
-
