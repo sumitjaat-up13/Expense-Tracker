@@ -57,7 +57,8 @@ This project is an expense management system that consists of a Streamlit fronte
 ![Add Expense](https://github.com/sumitjaat-up13/Expense-Tracker/blob/main/Screenshots/add%20update.png)  
 
 ### 2. Analytics Dashboard  
-![Analytics Dashboard](https://drive.google.com/file/d/1RvA1ceH-Et5xL9Ozdsm4nOCVC9hS-SOr/view?usp=sharing)  
+![Analytics Dashboard](https://github.com/sumitjaat-up13/Expense-Tracker/blob/main/Screenshots/analysis.png)  
+
 
 
 
