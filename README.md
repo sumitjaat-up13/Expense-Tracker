@@ -54,9 +54,10 @@ This project is an expense management system that consists of a Streamlit fronte
 ## 🖼️ Demo / Screenshots  
 
 ### 1. Add Expense Page  
-![Add Expense]([https://drive.google.com/file/d/1roSFzWDvlWG2hgaTxwiPIB8KYCM4PilS/view?usp=sharing](https://github.com/sumitjaat-up13/Expense-Tracker/blob/main/Screenshots/add%20update.png))  
+![Add Expense](https://github.com/sumitjaat-up13/Expense-Tracker/blob/main/Screenshots/add%20update.png)  
 
 ### 2. Analytics Dashboard  
 ![Analytics Dashboard](https://drive.google.com/file/d/1RvA1ceH-Et5xL9Ozdsm4nOCVC9hS-SOr/view?usp=sharing)  
+
 
 
