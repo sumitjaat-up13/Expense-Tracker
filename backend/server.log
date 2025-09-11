@@ -1,0 +1,10 @@
+2025-08-31 12:11:09,683 - db_helper - INFO - Fetching expenses for date called with: 2024/08/01
+2025-08-31 12:14:04,293 - db_helper - INFO - Fetching expenses for date called with: 2024/08/01
+2025-08-31 12:14:04,331 - db_helper - INFO - Inserting expense for date called with: 2024-08-25,amount: 40,category: Food,notes: Eat tasty samosa chat
+2025-08-31 12:14:04,342 - db_helper - INFO - Fetching expense summary for date called with: 2024-08-01 end: 2024-08-05
+2025-08-31 12:21:14,547 - db_helper - INFO - Fetching expenses for date called with: 2024-09-30
+2025-08-31 12:21:14,630 - db_helper - INFO - Fetching expense summary for date called with: 2024-08-01 end: 2024-08-05
+2025-08-31 12:40:36,627 - db_helper - INFO - Fetching expenses for date called with: 2024-09-30
+2025-08-31 12:40:36,688 - db_helper - INFO - Fetching expense summary for date called with: 2024-08-01 end: 2024-08-05
+2025-08-31 15:07:06,089 - db_helper - INFO - Fetching expenses for date called with: 2024-09-30
+2025-08-31 15:07:06,316 - db_helper - INFO - Fetching expense summary for date called with: 2024-08-01 end: 2024-08-05
